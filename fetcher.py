@@ -114,13 +114,13 @@ class Fetcher():
       "feature": data.json()
     }
 
-    filename_with_extension = f"{self.filename}.{self.format.lower()}"
+    path_to_filename_with_extension = f"./repo_list/{self.filename}.{self.format.lower()}"
 
-    if not os.path.isfile(filename_with_extension):
+    if not os.path.isfile(path_to_filename_with_extension):
       if self.format == "json":
-        with open(f"{filename_with_extension}", "w") as file:
+        with open(f"{path_to_filename_with_extension}", "w") as file:
           json.dump(combined_data, file, indent=4)
 
-        messagebox.showinfo("success", f"save {filename_with_extension} .")
+        messagebox.showinfo("success", f"save {path_to_filename_with_extension} .")
     else:
-      messagebox.showwarning("warning", f"{filename_with_extension} already exists.")
+      messagebox.showwarning("warning", f"{path_to_filename_with_extension} already exists.")
