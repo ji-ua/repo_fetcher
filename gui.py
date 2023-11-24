@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import tkinter as tk
 from tkinter import ttk
 import calendar
@@ -5,13 +8,17 @@ import calendar
 from fetcher import Fetcher
 
 class GUI(tk.Frame):
+    """GUI:enter query parameters."""
+
     def __init__(self, parent, *args, **kwargs):
+        """constructor of GUI."""
         super().__init__(parent, *args, **kwargs)
         self.parent = parent
         self.setup_ui()
         self.set_dafault_values()
 
     def setup_ui(self):
+        """set UI."""
         min_fork_row = 1
         max_fork_row= 2
         before_date_row = 3
@@ -85,6 +92,7 @@ class GUI(tk.Frame):
         submit_button.grid(row=send_row, column=2)
    
     def update_days(self, type):
+        """upadte days."""
         if type == 'before':
             year = int(self.before_year_var.get())
             month = int(self.before_month_var.get())
@@ -99,6 +107,7 @@ class GUI(tk.Frame):
 
     
     def set_dafault_values(self):
+        """set default parameters."""
         self.forks_min_entry.delete(0, tk.END)
         self.forks_max_entry.delete(0, tk.END)
         self.before_year_var.set("2023")

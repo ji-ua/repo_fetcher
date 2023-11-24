@@ -1,12 +1,21 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""Acquire repositories by conditional search. The format is json by default."""
+__author__ = 'Jinya Nishi'
+__version__ = '1.0.0'
+__date__ = '2023/11/24 (Created:2023/11/24)'
+
 import os
 from tkinter import messagebox
 import requests
 import json
 
-
 class Fetcher():
+  """Fetcher:fethch date."""
   @classmethod
   def peform(self, frame):
+     """send the query and save the data."""
      self.set_condition(frame=frame)
      query = self.construct_query()
      data = self.fetch_data(query=query)
@@ -14,6 +23,7 @@ class Fetcher():
 
   @classmethod
   def set_condition(self, frame):
+    """set condition."""
     self.forks_min = frame.forks_min_entry.get()
     self.forks_max = frame.forks_max_entry.get()
     self.pushed_before = self.set_date(year=frame.before_year_var.get(), month=frame.before_month_var.get(), day=frame.before_day_var.get())
@@ -25,6 +35,7 @@ class Fetcher():
   
   @classmethod
   def construct_query(self):
+    """create query."""
     query_parts = [f"archived:{self.archived}", f"topic:{self.topic}"]
 
     # フォーク数の条件を追加
@@ -63,12 +74,14 @@ class Fetcher():
     """
   
   def set_date(year, month, day):
+     """set date."""
      if year and month and day:
         return f"{year}-{int(month):02d}-{int(day):02d}"
      return ''
   
   @classmethod
   def fetch_data(self, query):
+    """ fetch data"""
     token = os.getenv('GITHUB_API_KEY')
     
     headers = {
@@ -82,6 +95,7 @@ class Fetcher():
   
   @classmethod
   def save_data_with_selection(self, data):
+    """save data."""
     selections = {
         "selections": {
            "forks_min": self.forks_min,
